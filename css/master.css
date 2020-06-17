@@ -1,0 +1,154 @@
+body{
+  background-color:black;
+  margin:0;
+}
+
+h1,h2,h3,p{
+  font-family: "OpenSans", sans-serif;
+  font-weight: 200;
+  margin:0;
+  color:rgb(230,230,230);
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+}
+
+h1{
+  font-size: 3vh;
+}
+
+h2{
+  font-size: 2.7vh;
+}
+
+h1 span{
+  color:white;
+  font-weight: 100;
+}
+
+#menubutton{
+  position:fixed;
+  z-index: 90;
+  left:calc(95vw - 7vh);
+  top:3.5vh;
+  width:7vh;
+  height:7vh;
+  background-color: rgba(0,0,0,0.85);
+  border-radius: 1vh;
+}
+
+#menubutton p{
+  line-height: 7vh;
+  font-size: 3vh;
+}
+
+.intro-bar{
+  position: relative;
+  margin:10vh 0;
+  height:25vh;
+  background-color:rgb(45,45,45);
+}
+
+.intro-bar img{
+  position: absolute;
+  height:15vh;
+  top:5vh;
+  left:5vw;
+  border:0.2vh solid white;
+  border-radius: 10vh;
+}
+
+.title{
+  position: absolute;
+  top:12.5vh;
+  left:calc(15vh + 10vw);
+  width:calc(85vw - 15vh);
+  transform: translate(0,-50%);
+}
+
+.projects{
+  position: relative;
+  margin-top:5vh;
+  margin-left:0;
+  padding-bottom:2.5vh;
+  background-color:rgb(35,35,35);
+  text-align: center;
+}
+
+.projects h2{
+  background-color:rgb(60,60,60);
+  line-height: 10vh;
+}
+
+.projects div{
+  position: relative;
+  width:80vw;
+  margin:5vh 10vw;
+  border-radius: 1vh;
+}
+
+.projects div img{
+  width:80vw;
+  margin:0;
+  border-radius: 1vh;
+}
+
+.projects div p{
+  position: absolute;
+  left:0;
+  bottom:0.5vh;
+  width:70vw;
+  min-height: 4vh;
+  padding:0.5vh 5vw;
+  font-weight: 300;
+  border-radius: 0 0 1vh 1vh;
+  background-color:rgba(0,0,0,0.75);
+}
+
+footer{
+  position: relative;
+  margin-top: 10vh;
+  padding:3vh 0;
+  background-color: rgb(20,20,20);
+}
+
+footer h3{
+  color:rgb(150,150,150);
+}
+
+footer a{
+  color:rgb(170,170,170);
+}
+
+@media (min-width:880px) {
+  h1{
+    font-size: 2.5vw;
+  }
+  h2{
+    font-size: 1.8vw;
+  }
+  .projects div{
+    display: inline-block;
+    margin:5vh 2vw;
+    width: 15vw;
+    filter: grayscale(100%);
+    transition: filter 0.2s;
+  }
+  .projects div:hover{
+    filter: grayscale(0%);
+  }
+  .projects div img{
+    width: 15vw;
+  }
+  .projects div p{
+    padding:0.5vh 1vw;
+    width: 13vw;
+    transform-origin: bottom;
+    transition: transform 0.2s;
+  }
+  .projects div:hover p{
+    transform: scaleY(1.05);
+  }
+}
