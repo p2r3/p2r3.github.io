@@ -42,6 +42,7 @@ h1 span{
 #menubutton p{
   line-height: 7vh;
   font-size: 3vh;
+  transform: rotate(90deg);
 }
 
 .intro-bar{
@@ -122,7 +123,7 @@ footer a{
   color:rgb(170,170,170);
 }
 
-@media (min-width:880px) {
+@media (min-width: 768px) {
   h1{
     font-size: 2.5vw;
   }
