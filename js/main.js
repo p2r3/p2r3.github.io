@@ -35,28 +35,43 @@ var sliderObjects;
 
 function loadSliderObjects(){
   sliderObjects = document.getElementById("slider-objects");
-  sliderObject("images/webdev.png","Web development");
-  sliderObject("images/osu.png","osu!");
+  sliderObject("images/flips.png","Trampoline flips","pages/flips.html");
+  sliderObject("images/webdev.png","Web development","pages/webdev.html");
+  sliderObject("images/osu.png","osu!","pages/osu.html");
   if(objectCount%2==0) var sliderShift = 25;
   else var sliderShift = 0;
   sliderObjects.style.left=sliderShift+50+"vw";
   sliderObjects.style.top="0";
   sliderObjects.style.width=objectCount*50+"vw";
+  currentObject = Math.ceil(objectCount/2);
 }
 
 var objectCount = 0;
+var currentObject = 0;
 
-function sliderObject(img, title){
+function sliderObject(img, title, url){
   objectCount++;
-  sliderObjects.innerHTML += "<div class='slider-object'><img src='"+img+"'><h3>"+title+"</h3></div>";
+  sliderObjects.innerHTML += "<div class='slider-object' onclick='goToUrl(\""+url+"\")'><img src='"+img+"' alt='Empty'><h3>"+title+"</h3></div>";
+}
+
+function goToUrl(url){
+  setTimeout(function () {
+    window.location.href=url;
+  }, 300);
 }
 
 function moveSlider(direction){
   var prevLeft = sliderObjects.style.left;
   if(direction === "left"){
-    sliderObjects.style.left = parseInt(prevLeft.split("vw")[0],10)-50+"vw";
+    if(currentObject !== objectCount){
+      sliderObjects.style.left = parseInt(prevLeft.split("vw")[0],10)-50+"vw";
+      currentObject++;
+    }
   }
   if(direction === "right"){
-    sliderObjects.style.left = parseInt(prevLeft.split("vw")[0],10)+50+"vw";
+    if(currentObject !== 1){
+      sliderObjects.style.left = parseInt(prevLeft.split("vw")[0],10)+50+"vw";
+      currentObject--;
+    }
   }
 }
