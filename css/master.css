@@ -1,11 +1,19 @@
+html, body{
+  overflow-x: hidden;
+}
+
 body{
+  position: relative;
   background-color:black;
   background-image: url("../images/bg.jpg");
   background-attachment: fixed;
   background-position: 0 0;
   background-size: 100vw 100vh;
   margin:0;
-  overflow-x: hidden;
+}
+
+.homepage-scrollock{
+  overflow-y: hidden;
 }
 
 h1,h2,h3,p{
@@ -73,18 +81,16 @@ span{
 }
 
 .slider-title{
-  position: absolute;
-  left:0;
-  bottom:52vh;
+  position: relative;
+  margin-top:5vh;
   width:100vw;
   font-weight: 100;
   letter-spacing: 0.15rem;
 }
 
 #slider{
-  position: absolute;
-  left:0;
-  top:50vh;
+  position: relative;
+  margin-top:2vh;
   width:100vw;
   height:30vh;
   background-color:rgba(150,150,150,0.225);
