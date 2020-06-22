@@ -14,13 +14,13 @@
       <img src="images/p2-final-optimised.jpg" alt="P2R3">
       <h2 class="title">I'm a <span>fifteen</span> year old <span>web developer</span> from <span>Latvia</span>.</h2>
     </div>
-    <h1 class="slider-title">I can do...</h1>
+    <h1 id="slider-title">I can do...</h1>
     <div id="slider">
       <div id="slider-objects">
         <!-- JavaScript content -->
       </div>
-      <div class="slider-arrow" onclick="moveSlider('left')"><p>&#8249;</p></div>
-      <div class="slider-arrow slider-arrow-right" onclick="moveSlider('right')"><p>&#8250;</p></div>
+      <div class="slider-arrow unselectable" onclick="moveSlider('right')"><p>&#8249;</p></div>
+      <div class="slider-arrow slider-arrow-right unselectable" onclick="moveSlider('left')"><p>&#8250;</p></div>
     </div>
   </body>
 </html>

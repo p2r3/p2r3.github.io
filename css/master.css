@@ -80,7 +80,7 @@ span{
   transform: translate(0,-50%);
 }
 
-.slider-title{
+#slider-title{
   position: relative;
   margin-top:5vh;
   width:100vw;
@@ -168,6 +168,15 @@ footer h1{
   line-height: 10vh;
 }
 
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 /* Breakpoints */
 /* Non-standard, just whatever works with my site. */
 
@@ -225,7 +234,7 @@ footer h1{
     left:calc(15vh + 30vw);
     width:calc(55vw - 15vh);
   }
-  .slider-title{
+  #slider-title{
     letter-spacing: 0.5rem;
   }
   #slider{
@@ -264,7 +273,6 @@ footer h1{
     text-align: center;
     line-height: 45vh;
     margin:0;
-    user-select: none;
   }
   .slider-arrow-right{
     right:0;
@@ -280,10 +288,10 @@ footer h1{
     background-position: 0 0;
   }
   h1{
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   h2{
-    font-size: 2.6rem;
+    font-size: 2.4rem;
   }
   h3{
     font-size: 3.2rem;
@@ -297,8 +305,8 @@ footer h1{
     left:5vw;
   }
   .title{
-    left:calc(15vh + 10vw);
-    width:calc(45vw - 15vh);
+    left:calc(15vh + 8vw);
+    width:calc(49vw - 15vh);
   }
   #slider{
     padding-top:5vh;

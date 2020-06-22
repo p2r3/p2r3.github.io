@@ -35,9 +35,11 @@ var sliderObjects;
 
 function loadSliderObjects(){
   sliderObjects = document.getElementById("slider-objects");
+  sliderObject("images/cubing.png","Cubing","pages/cubing.html");
   sliderObject("images/flips.png","Trampoline flips","pages/flips.html");
   sliderObject("images/webdev.png","Web development","pages/webdev.html");
-  sliderObject("images/osu.png","osu!","pages/osu.html");
+  sliderObject("images/osu.png","osu!","pages/osu.html","I can play...");
+  sliderObject("images/nosocial.png","Social media","pages/social.html", "I don't do...");
   if(objectCount%2==0) var sliderShift = 25;
   else var sliderShift = 0;
   sliderObjects.style.left=sliderShift+50+"vw";
@@ -48,9 +50,11 @@ function loadSliderObjects(){
 
 var objectCount = 0;
 var currentObject = 0;
+var objectSliderTitle = [];
 
-function sliderObject(img, title, url){
+function sliderObject(img, title, url, slidertitle){
   objectCount++;
+  if(slidertitle !== undefined) objectSliderTitle[objectCount] = slidertitle;
   sliderObjects.innerHTML += "<div class='slider-object' onclick='goToUrl(\""+url+"\")'><img src='"+img+"' alt='Empty'><h3>"+title+"</h3></div>";
 }
 
@@ -74,4 +78,6 @@ function moveSlider(direction){
       currentObject--;
     }
   }
+  if(objectSliderTitle[currentObject] !== undefined) document.getElementById("slider-title").innerHTML = objectSliderTitle[currentObject];
+  else document.getElementById("slider-title").innerHTML = "I can do...";
 }
