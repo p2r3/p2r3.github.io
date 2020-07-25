@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>midroll</title>
+    <script type="text/javascript">
+
+      function loadRandom() {
+
+        var number = 0;
+        document.getElementById("number").style.color = "rgb(160, 255, 180)";
+
+        for ( var i = 1; i <= 100; i++ )
+          number += Math.round( Math.random() );
+
+        document.getElementById("number").innerHTML = number;
+
+        if ( number == 100 || number == 0 )
+          document.getElementById("number").style.color = "rgb(255,255,0)";
+
+      }
+
+    </script>
+    <style media="screen">
+
+      body, html{
+        margin:0;
+        background-color: rgb(10,15,25);
+      }
+
+      h1, h2, p, button{
+        font-family: sans-serif;
+        text-align: center;
+        color:rgb(200, 220, 255);
+        padding:0 5vw 0 5vw;
+      }
+
+      h1{
+        margin:10vh 0 0 0;
+        color:rgb(160, 255, 180);
+      }
+
+      h2{
+        margin:25vh 0 0 0;
+        font-weight: normal;
+      }
+
+      button{
+        margin:10vh 0 0 20vw;
+        width:60vw;
+        line-height: 7vh;
+        border: 2px solid white;
+        background: none;
+        font-size: 1.2rem;
+      }
+
+      button:focus{
+        -moz-outline-style: none;
+        outline:none;
+        outline:0;
+      }
+
+      p{
+        opacity: 0.5;
+        margin-top:10vh;
+      }
+
+      @media (min-width: 512px) {
+
+        h2{
+          margin:10vh 0 0 0;
+          font-size: 1.8rem;
+        }
+
+        h1{
+          margin:30vh 0 0 0;
+          font-size: 3rem;
+        }
+
+        button{
+          margin:20vh 0 0 35vw;
+          width:30vw;
+        }
+
+      }
+
+    </style>
+  </head>
+  <body>
+    <h2 id="title">The most annoying random number generator!</h2>
+    <h1 id="number">Click roll!</h1>
+    <button onclick="loadRandom()">Roll</button>
+    <p>Yes, rolling 0 or 100 is possible, but it'll take a very, <i>very</i> long time.</p>
+  </body>
+</html>
