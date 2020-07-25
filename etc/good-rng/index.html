@@ -3,17 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Roll | p2r3's website</title>
+    <title>midroll</title>
     <script type="text/javascript">
+
+      var array = [],
+          arraySum = 0,
+          last = Math.round( Math.random() * 9 );
 
       function loadRandom() {
 
-        var number = 0;
+        var number = 0, current = last;
         document.getElementById("number").style.color = "rgb(160, 255, 180)";
 
-        for ( var i = 1; i <= 100; i++ )
-          number += Math.round( Math.random() );
+        while ( array [ current ] )
+          current = Math.round( Math.random() * 9 );
+        if ( arraySum == 9 )
+          array = [], arraySum = 1;
+        else arraySum++;
+        array [ current ] = true;
+        number = current * 10 + Math.round( Math.random() * 10 );
 
+        last = current;
         document.getElementById("number").innerHTML = number;
 
         if ( number == 100 || number == 0 )
@@ -88,9 +98,9 @@
     </style>
   </head>
   <body>
-    <h2 id="title">The most annoying random number generator!</h2>
+    <h2 id="title">The most satisfying random number generator!</h2>
     <h1 id="number">Click roll!</h1>
     <button onclick="loadRandom()">Roll</button>
-    <p>Yes, rolling 0 or 100 is possible, but it'll take a very, <i>very</i> long time.</p>
+    <p>It's very difficult to go on a long streak of similar rolls.</p>
   </body>
 </html>
