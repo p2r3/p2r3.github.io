@@ -1,6 +1,6 @@
 {
   "time": ["(08:00)","(8:45)","(9:35)","(10:30)","(11:20)","(12:05)","(12:50)","(13:40)","(14:30)"],
-  "minutes": [0,480,480,520,525,565,575,615,630,670,680,720,725,765,820,860,870,910,910,910],
+  "minutes": [0,480,480,520,525,565,575,615,630,670,680,720,725,765,770,810,820,860,870,910,910],
   "schedule": [
     ["Stundas vēl nav sākušās", "Kultūras pamati", "Kultūras pamati", "Kultūras pamati", "Sports", "Angļu valoda", "Angļu valoda", "Pusdienas", "Literatūra"],
     ["Stundas vēl nav sākušās", "Dizains un Tehnoloģijas / Programmēšana", "Dizains un Tehnoloģijas / Programmēšana", "Ķīmija", "Matemātika", "Fizika", "Fizika", "Pusdienas", "Matemātika", "Klases stunda"],
