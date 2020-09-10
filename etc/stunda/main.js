@@ -53,10 +53,10 @@ function loadNextLesson(){
 
   if ( totalMinutes >= lessons.minutes[scheduleLength * 2 - 1] ){
     nextName = lessons.schedule[day + 1][1];
-    nextTime = lessons.time[0];
+    nextTime = "rīt, " + lessons.time[0];
     if ( nextName == "-" ){
       nextName = lessons.schedule[day + 1][2];
-      nextTime = lessons.time[1];
+      nextTime = "rīt, " + lessons.time[1];
     }
     currName = "Beigušās stundas";
   }

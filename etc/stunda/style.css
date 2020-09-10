@@ -24,12 +24,16 @@ h1, h2, h3{
 
 h1{
   color:rgb(120,120,120);
-  font-size: 2rem;
+  font-size: 4.5vh;
 }
 
 h2, h3{
   color:rgb(200,200,200);
-  font-size: 1.5rem;
+  font-size: 3vh;
+}
+
+h3{
+  font-size: 2vh;
 }
 
 #group-title{
