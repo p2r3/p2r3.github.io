@@ -13,6 +13,7 @@ function loadGroupInfo(group){
       lessons = JSON.parse( data.responseText );
       if ( day != 6 && day != -1 ) loadNextLesson();
         else loadFreeDay();
+      getId("group-prompt").style.opacity = 0;
     }
   }
   data.send();

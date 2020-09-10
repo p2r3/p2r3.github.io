@@ -1,0 +1,70 @@
+body{
+  background-color:rgb(5,10,20);
+  margin:0;
+  padding:0;
+}
+
+#group-prompt{
+  position: absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color:rgb(5,10,20);
+  opacity:1;
+  transition: opacity 0.5s;
+}
+
+h1, h2, h3{
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+}
+
+h1{
+  color:rgb(120,120,120);
+}
+
+h2, h3{
+  color:rgb(200,200,200);
+}
+
+#group-title{
+  margin:30vh 0 10vh 0;
+}
+
+.group-button{
+  margin-bottom:5%;
+  background-color:rgba(255,255,255,0.1);
+  line-height: 7vh;
+  transition: background-color 0.15s;
+}
+
+.group-button h2{
+  transition: letter-spacing 0.08s;
+  font-weight: normal;
+}
+
+.group-button:hover{
+  background-color:rgba(255,255,255,0.15);
+}
+
+.group-button:hover h2{
+  letter-spacing: 0.3vw;
+}
+
+#nextlesson-header{
+  margin-top:32vh;
+  background-color:rgba(255,255,255,0.05);
+  line-height: 6vh;
+}
+
+#nextlesson-time{
+  font-family: monospace;
+  font-weight: normal;
+}
+
+#currentlesson-header{
+  background-color:rgba(255,255,255,0.05);
+  line-height: 6vh;
+}

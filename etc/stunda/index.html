@@ -4,18 +4,19 @@
     <meta charset="utf-8">
     <title>DV 10.VI Nākamā stunda | p2r3's website</title>
     <script src="main.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div id="group-prompt">
-      <h1>Kurā klasē Tu mācies?</h1>
-      <div id="group-v" onclick="loadGroupInfo('v')">Valodu un kultūras klasē</div>
-      <div id="group-i" onclick="loadGroupInfo('i')">Inženierzinātņu klasē</div>
+      <h1 id="group-title">Kurā klasē Tu mācies?</h1>
+      <div class="group-button" onclick="loadGroupInfo('v')"><h2>Valodu un kultūras klasē</h2></div>
+      <div class="group-button" onclick="loadGroupInfo('i')"><h2>Inženierzinātņu klasē</h2></div>
     </div>
     <div id="lesson-display">
-      <h1 id="nextlesson-header">Nākamā stunda ir</h1>
+      <h1 id="nextlesson-header">Nākamā stunda</h1>
       <h2 id="nextlesson-name">...</h2>
       <h3 id="nextlesson-time"></h3>
-      <h1 id="currentlesson-header">Tagad ir</h1>
+      <h1 id="currentlesson-header">Tagad</h1>
       <h2 id="currentlesson-name">...</h2>
     </div>
   </body>
