@@ -24,7 +24,7 @@ var dateObj = new Date();
 var day = dateObj.getDay() - 1;
 var totalMinutes = dateObj.getMinutes() + dateObj.getHours() * 60;
 
-var nextHeader, nextName, nextTime, currHeader, currName;
+var nextHeader, nextName, nextTime, currHeader, currName, late = false;
 
 function loadNextLesson(){
 
@@ -40,7 +40,14 @@ function loadNextLesson(){
         nextName = lessons.schedule[day][j + 2];
         nextTime = lessons.time[j + 1];
       }
+
       if ( i % 2 == 1 ) currName = "Starpbrīdis";
+
+      if ( nextName === undefined ){
+        if ( lessons.schedule[day + 1][1] == "-" ) late = true;
+        nextName = lessons.schedule[day + 1][1 + late];
+        nextTime = "rīt, " + lessons.time[0 + late];
+      }
     }
   }
 
