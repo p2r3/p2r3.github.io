@@ -13,7 +13,12 @@ function loadGroupInfo(group){
       lessons = JSON.parse( data.responseText );
       if ( day != 6 && day != -1 ) loadNextLesson();
         else loadFreeDay();
+      loadLessonList();
       getId("group-prompt").style.opacity = 0;
+      setTimeout(function(){
+        getId("group-prompt").style.display = "none";
+        getId("viewlist").style.opacity = 1;
+      }, 700);
     }
   }
   data.send();
@@ -28,7 +33,7 @@ var nextHeader, nextName, nextTime, currHeader, currName, late = false;
 
 function loadNextLesson(){
 
-  var scheduleLength = lessons.schedule[day].length
+  var scheduleLength = lessons.schedule[day].length;
 
   for ( var i = 0; i < scheduleLength * 2; i++ ){
     if ( totalMinutes >= lessons.minutes[i] ){
@@ -79,4 +84,35 @@ function displayNextLesson(){
   getId("nextlesson-name").innerHTML = nextName;
   getId("nextlesson-time").innerHTML = nextTime;
   getId("currentlesson-name").innerHTML = currName;
+}
+
+var listVisible = false;
+
+function viewList(){
+  if ( !listVisible ){
+     getId("list-display").style.opacity = 1;
+     getId("lesson-display").style.filter = "blur(5px)";
+     setTimeout(function(){
+       listVisible = true;
+     }, 100);
+  }
+}
+
+function hideList(){
+  if ( listVisible ){
+    getId("list-display").style.opacity = 0;
+    getId("lesson-display").style.filter = "blur(0px)";
+    setTimeout(function() {
+      listVisible = false;
+    }, 100);
+  }
+}
+
+function loadLessonList(){
+  
+  var scheduleLength = lessons.schedule[day].length;
+  
+  for (var i = 1; i < scheduleLength; i++) {
+    getId("list-display").innerHTML += "<p class='list-lesson'>" + lessons.schedule[day][i] + "</p><p class='list-time'>" + lessons.time[i - 1] + "</p>";
+  }  
 }
