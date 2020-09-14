@@ -88,6 +88,10 @@ p{
   font-weight: normal;
 }
 
+#nextlesson-time span{
+  font-size: 1.5vh;
+}
+
 #currentlesson-header{
   background-color:rgba(255,255,255,0.05);
   line-height: 6vh;
@@ -125,6 +129,7 @@ p{
   text-align: left;
   width:50%;
   display:inline-block;
+  font-family: sans-serif;
 }
 
 .list-time{
@@ -132,4 +137,5 @@ p{
   text-align: right;
   width:50%;
   display:inline-block;
+  font-family: monospace;
 }

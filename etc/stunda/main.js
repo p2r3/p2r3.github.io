@@ -36,24 +36,32 @@ function loadNextLesson(){
   var scheduleLength = lessons.schedule[day].length;
 
   for ( var i = 0; i < scheduleLength * 2; i++ ){
+
     if ( totalMinutes >= lessons.minutes[i] ){
+
       var j = Math.floor(i / 2);
       nextName = lessons.schedule[day][j + 1];
       currName = lessons.schedule[day][j];
-      nextTime = lessons.time[j];
+      updateTimeDisplay(lessons.time[j], lessons.minutes[i + 2]);
+
       if ( nextName == "-" ){
         nextName = lessons.schedule[day][j + 2];
         nextTime = lessons.time[j + 1];
       }
 
-      if ( i % 2 == 1 ) currName = "Starpbrīdis";
+      if ( i % 2 == 1 ){
+        currName = "Starpbrīdis";
+        updateTimeDisplay(lessons.time[j], lessons.minutes[i + 1]);
+      }
 
       if ( nextName === undefined ){
         if ( lessons.schedule[day + 1][1] == "-" ) late = true;
         nextName = lessons.schedule[day + 1][1 + late];
         nextTime = "rīt, " + lessons.time[0 + late];
       }
+
     }
+
   }
 
   if ( totalMinutes >= lessons.minutes[scheduleLength * 2 - 1] ){
@@ -66,53 +74,76 @@ function loadNextLesson(){
     currName = "Beigušās stundas";
   }
 
-  console.log(totalMinutes + " " + day);
-
   displayNextLesson();
 }
 
 function loadFreeDay(){
+
   nextHeader = "Pirmdienas rītā būs";
   nextName = lessons.schedule[0][1];
   nextTime = lessons.time[0];
   currHeader = "Šodien ir";
   currName = "Brīvdiena";
   displayNextLesson();
+
 }
 
 function displayNextLesson(){
+
+  if( nextHeader === undefined ) nextHeader = "Nākamā stunda";
+  if( currHeader === undefined ) currHeader = "Tagad";
+
+  getId("nextlesson-header").innerHTML = nextHeader;
   getId("nextlesson-name").innerHTML = nextName;
   getId("nextlesson-time").innerHTML = nextTime;
+  getId("currentlesson-header").innerHTML = currHeader;
   getId("currentlesson-name").innerHTML = currName;
+
 }
 
 var listVisible = false;
 
 function viewList(){
+
   if ( !listVisible ){
      getId("list-display").style.opacity = 1;
      getId("lesson-display").style.filter = "blur(5px)";
+
      setTimeout(function(){
        listVisible = true;
      }, 100);
   }
+
 }
 
 function hideList(){
+
   if ( listVisible ){
     getId("list-display").style.opacity = 0;
     getId("lesson-display").style.filter = "blur(0px)";
+
     setTimeout(function() {
       listVisible = false;
     }, 100);
   }
+
 }
 
 function loadLessonList(){
-  
+
   var scheduleLength = lessons.schedule[day].length;
-  
-  for (var i = 1; i < scheduleLength; i++) {
-    getId("list-display").innerHTML += "<p class='list-lesson'>" + lessons.schedule[day][i] + "</p><p class='list-time'>" + lessons.time[i - 1] + "</p>";
-  }  
+  var listString = "";
+
+  for ( var i = 1; i < scheduleLength; i++ ) {
+    listString += "<p class='list-lesson'>" + lessons.schedule[day][i] + "</p><p class='list-time'>" + lessons.time[i - 1] + "</p>";
+  }
+
+  getId("list-display").innerHTML = listString;
+
+}
+
+function updateTimeDisplay(time, mins){
+
+  nextTime = time + "<br><span>(vēl " + ( mins - totalMinutes ) + " minūtes)</span>";
+
 }
