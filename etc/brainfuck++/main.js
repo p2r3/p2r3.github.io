@@ -11,7 +11,7 @@ function setOutput(val){
 }
 
 function getIndex(name){
-  for(var i = 1; i < varNames.length; i++){
+  for(var i = 2; i < varNames.length; i++){
     if(name == varNames[i]) return(i);
   }
   alert("Error: Can't get index of " + name + " because it is undefined.");
@@ -30,32 +30,44 @@ function goToIndex(ind){
   }
 }
 
-function addition(arr, ind, rez){
-  var first = getIndex(arr[ind - 1]);
-  var second = getIndex(arr[ind + 1]);
-  goToIndex(first);
-  output+="[-";
-  for(var i=1;i<=globalIndex;i++) output+="<";
-  output+="+";
-  for(var i=1;i<=first;i++) output+=">";
-  output+="]";
+function fullAddition(ind1, ind2, rez){
+  singleAddition(ind1, 1);
+  singleAddition(ind2, 1);
+  singleMove(1, rez);
+}
+
+function singleAddition(ind1, ind2){
+  singleMove(ind1,0);
   goToIndex(0);
   output+="[-";
-  for(var i=1;i<=first;i++) output+=">";
+  goToIndex(ind1);
   output+="+";
-  if(first < rez) for(var i=first;i<rez;i++) output+=">";
-  else for(var i=first;i>rez;i--) output+="<";
+  goToIndex(ind2);
   output+="+";
-  for(var i=rez;i>0;i--) output+="<";
+  goToIndex(0);
   output+="]";
-  //add second
+}
+
+function singleMove(ind1, ind2){
+  goToIndex(ind1);
+  output+="[-";
+  goToIndex(ind2);
+  output+="+";
+  goToIndex(ind1);
+  output+="]";
+}
+
+function clear(ind){
+  goToIndex(ind);
+  output+="[-]";
 }
 
 var varNames = [];
 var globalIndex = 0;
 var output = "";
 
-varNames[0] = "TEMP";
+varNames[0] = "TEMP1";
+varNames[1] = "TEMP2"
 
 function compile(){
   var lines = getCode().split("\n");
@@ -67,7 +79,7 @@ function compile(){
       var currentIndex = varNames.length;
       var currentName = lines[i].substr(0, lines[i].indexOf(" = "));
 
-      for(var j = 1; j < varNames.length; j++){
+      for(var j = 2; j < varNames.length; j++){
         if(currentName == varNames[j]){
           currentIndex = j;
           break;
@@ -78,22 +90,21 @@ function compile(){
 
       varNames[currentIndex] = currentName;
 
-      output += "[-]";
-
       if(split.length == 3){
 
-        for(var j=1;j<=parseInt(split[2],10);j++) output+="+";
+        if (!isNaN(split[2])) {
+          output += "[-]";
+          for(var j=1;j<=parseInt(split[2],10);j++) output+="+";
+        } else if (split[2] != split[0]) {
+          clear(currentIndex);
+          singleAddition(getIndex(split[2]), currentIndex);
+        }
 
       } else {
 
-        for(var j = 3; j < split.length; j+=2){
-          if(split[j] == "+") addition(split, j, currentIndex);
-        }
+        if(split[3] == "+") fullAddition(getIndex(split[2]), getIndex(split[4]), currentIndex);
 
       }
-
-      //z = a + b - c
-      //0 1 2 3 4 5 6
 
     }
 
