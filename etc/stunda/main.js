@@ -11,7 +11,7 @@ function loadGroupInfo(group){
   data.onreadystatechange = function(){
     if ( data.readyState == 4 && data.status == "200" ){
       lessons = JSON.parse( data.responseText );
-      if ( day != 6 && day != -1 ) loadNextLesson();
+      if ( day != 5 && day != -1 ) loadNextLesson();
         else loadFreeDay();
       loadLessonList();
       getId("group-prompt").style.opacity = 0;
@@ -33,38 +33,43 @@ var nextHeader, nextName, nextTime, currHeader, currName, late = false;
 
 function loadNextLesson(){
 
-  var scheduleLength = lessons.schedule[day].length;
+  if ( lessons.schedule[day] !== undefined ){
 
-  for ( var i = 0; i < scheduleLength * 2; i++ ){
+    var scheduleLength = lessons.schedule[day].length;
 
-    if ( totalMinutes >= lessons.minutes[i] ){
+    for ( var i = 0; i < scheduleLength * 2; i++ ){
 
-      var j = Math.floor(i / 2);
-      nextName = lessons.schedule[day][j + 1];
-      currName = lessons.schedule[day][j];
-      updateTimeDisplay(lessons.time[j], lessons.minutes[i + 2]);
+      if ( totalMinutes >= lessons.minutes[i] ){
 
-      if ( nextName == "-" ){
-        nextName = lessons.schedule[day][j + 2];
-        nextTime = lessons.time[j + 1];
+        var j = Math.floor(i / 2);
+        nextName = lessons.schedule[day][j + 1];
+        currName = lessons.schedule[day][j];
+        updateTimeDisplay(lessons.time[j], lessons.minutes[i + 2]);
+
+        if ( nextName == "-" ){
+          nextName = lessons.schedule[day][j + 2];
+          nextTime = lessons.time[j + 1];
+        }
+
+        if ( i % 2 == 1 ){
+          currName = "Starpbrīdis";
+          updateTimeDisplay(lessons.time[j], lessons.minutes[i + 1]);
+        }
+
+        if ( nextName === undefined && day != 5 && day != -1){
+          if ( lessons.schedule[day + 1][1] == "-" ) late = true;
+          nextName = lessons.schedule[day + 1][1 + late];
+          nextTime = "rīt, " + lessons.time[0 + late];
+        }
+
       }
-
-      if ( i % 2 == 1 ){
-        currName = "Starpbrīdis";
-        updateTimeDisplay(lessons.time[j], lessons.minutes[i + 1]);
-      }
-
-      if ( nextName === undefined ){
-        if ( lessons.schedule[day + 1][1] == "-" ) late = true;
-        nextName = lessons.schedule[day + 1][1 + late];
-        nextTime = "rīt, " + lessons.time[0 + late];
-      }
-
-    }
 
   }
 
-  if ( totalMinutes >= lessons.minutes[scheduleLength * 2 - 1] ){
+
+  }
+
+  if ( totalMinutes >= lessons.minutes[scheduleLength * 2 - 1] && day != 5 && day != -1 ){
     nextName = lessons.schedule[day + 1][1];
     nextTime = "rīt, " + lessons.time[0];
     if ( nextName == "-" ){
@@ -84,6 +89,7 @@ function loadFreeDay(){
   nextTime = lessons.time[0];
   currHeader = "Šodien ir";
   currName = "Brīvdiena";
+  getId("viewlist").style.display = "none";
   displayNextLesson();
 
 }
@@ -131,14 +137,19 @@ function hideList(){
 
 function loadLessonList(){
 
-  var scheduleLength = lessons.schedule[day].length;
-  var listString = "";
+  if ( lessons.schedule[day] !== undefined ){
 
-  for ( var i = 1; i < scheduleLength; i++ ) {
-    listString += "<p class='list-lesson'>" + lessons.schedule[day][i] + "</p><p class='list-time'>" + lessons.time[i - 1] + "</p>";
+    var scheduleLength = lessons.schedule[day].length;
+    var listString = "";
+
+    for ( var i = 1; i < scheduleLength; i++ ) {
+      listString += "<p class='list-lesson'>" + lessons.schedule[day][i] + "</p><p class='list-time'>" + lessons.time[i - 1] + "</p>";
+    }
+
+    getId("list-display").innerHTML = listString;
+
   }
 
-  getId("list-display").innerHTML = listString;
 
 }
 
