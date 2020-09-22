@@ -94,9 +94,14 @@ function singleSubtraction(ind1, ind2){
   output+="]";
 }
 
-function fullSubtNumber(ind, num, rez){
-  singleAddition(ind, 1);
-  subtNumber(1, num);
+function fullSubtNumber(ind, num, rez, invert){
+  if(invert){
+    addNumber(1, num);
+    singleSubtraction(ind, 1);
+  } else {
+    singleAddition(ind, 1);
+    subtNumber(1, num);
+  }
   clear(rez);
   singleMove(1, rez);
 }
@@ -158,8 +163,8 @@ function compile(){
         
         if(split[3] == "-") {
           if(isNaN(split[2]) && isNaN(split[4])) fullSubtraction(getIndex(split[2]), getIndex(split[4]), currentIndex);
-          else if (isNaN(split[2])) fullSubtNumber(getIndex(split[2]), parseInt(split[4], 10), currentIndex);
-          else if (isNaN(split[4])) fullSubtNumber(parseInt(split[2], 10), getIndex(split[4]), currentIndex);
+          else if (isNaN(split[2])) fullSubtNumber(getIndex(split[2]), parseInt(split[4], 10), currentIndex, false);
+          else if (isNaN(split[4])) fullSubtNumber(getIndex(split[4]), parseInt(split[2], 10), currentIndex, true);
           else {
             clear(currentIndex);
             var temp = parseInt(split[2], 10) - parseInt(split[4], 10);
