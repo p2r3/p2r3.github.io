@@ -33,6 +33,7 @@ function goToIndex(ind){
 function fullAddition(ind1, ind2, rez){
   singleAddition(ind1, 1);
   singleAddition(ind2, 1);
+  clear(rez);
   singleMove(1, rez);
 }
 
@@ -60,6 +61,18 @@ function singleMove(ind1, ind2){
 function clear(ind){
   goToIndex(ind);
   output+="[-]";
+}
+
+function addNumber(ind, num){
+  goToIndex(ind);
+  for(var i = 0; i < num; i++) output+="+";
+}
+
+function fullAddNumber(ind, num, rez){
+  singleAddition(ind, 1);
+  addNumber(1, num);
+  clear(rez);
+  singleMove(1, rez);
 }
 
 var varNames = [];
@@ -93,8 +106,8 @@ function compile(){
       if(split.length == 3){
 
         if (!isNaN(split[2])) {
-          output += "[-]";
-          for(var j=1;j<=parseInt(split[2],10);j++) output+="+";
+          clear(currentIndex);
+          addNumber(currentIndex, parseInt(split[2],10));
         } else if (split[2] != split[0]) {
           clear(currentIndex);
           singleAddition(getIndex(split[2]), currentIndex);
@@ -102,7 +115,15 @@ function compile(){
 
       } else {
 
-        if(split[3] == "+") fullAddition(getIndex(split[2]), getIndex(split[4]), currentIndex);
+        if(split[3] == "+") {
+          if(isNaN(split[2]) && isNaN(split[3])) fullAddition(getIndex(split[2]), getIndex(split[4]), currentIndex);
+          else if(isNaN(split[2])) fullAddNumber(getIndex(split[2]), parseInt(split[4], 10), currentIndex);
+          else if(isNaN(split[4])) fullAddNumber(parseInt(split[2], 10), getIndex(split[4]), currentIndex);
+          else{
+            clear(currentIndex);
+            addNumber(currentIndex, parseInt(split[2], 10) + parseInt(split[4], 10));
+          }
+        }
 
       }
 
