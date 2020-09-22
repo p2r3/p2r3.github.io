@@ -116,7 +116,7 @@ function compile(){
       } else {
 
         if(split[3] == "+") {
-          if(isNaN(split[2]) && isNaN(split[3])) fullAddition(getIndex(split[2]), getIndex(split[4]), currentIndex);
+          if(isNaN(split[2]) && isNaN(split[4])) fullAddition(getIndex(split[2]), getIndex(split[4]), currentIndex);
           else if(isNaN(split[2])) fullAddNumber(getIndex(split[2]), parseInt(split[4], 10), currentIndex);
           else if(isNaN(split[4])) fullAddNumber(parseInt(split[2], 10), getIndex(split[4]), currentIndex);
           else{
