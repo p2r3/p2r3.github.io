@@ -111,19 +111,6 @@ function subtNumber(ind, num){
   for(var i = 0; i < num; i++) output+="-";
 }
 
-function setNumber(ind, num){
-  goToIndex(ind);
-  while(varValues[ind] != num){
-    if(varValues[ind] < num){
-      varValues[ind]++;
-      output += "+";
-    } else {
-      varValues[ind]--;
-      output += "-";
-    }
-  }
-}
-
 var varNames = [];
 var globalIndex = 0;
 var output = "";
@@ -139,10 +126,22 @@ function compile(){
 
     if(lines[i][0] == "\"" && lines[i][1] == " ") {
       
+      clear(0);
+      var temp = 0;
+      
       for(var j = 2; j < lines[i].length; j++) {
-        setNumber(0, lines[i].charCodeAt(j));
+        while(temp != lines[i].charCodeAt(j)){
+          if(temp < lines[i].charCodeAt(j)){
+            temp++;
+            output += "+";
+          } else {
+            temp--;
+            output += "-";
+          }
+        }
         output += ".";
       }
+      
       clear(0);
       
     }
@@ -167,7 +166,8 @@ function compile(){
       if(split.length == 3){
 
         if (!isNaN(split[2])) {
-          setNumber(currentIndex, parseInt(split[2],10));
+          clear(currentIndex);
+          addNumber(currentIndex, parseInt(split[2],10));
         } else if (split[2] != split[0]) {
           clear(currentIndex);
           singleAddition(getIndex(split[2]), currentIndex);
