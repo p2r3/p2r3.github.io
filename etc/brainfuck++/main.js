@@ -122,6 +122,18 @@ function compile(){
   var lines = getCode().split("\n");
   for(var i = 0; i < lines.length; i++){
 
+    if(lines[i][0] == "/" && lines[i][1] == "/") continue;
+
+    if(lines[i][0] == "\"" && lines[i][1] == " ") {
+      
+      for(var j = 2; j < lines[i].length; j++) {
+        addNumber(0, lines[i].charCodeAt(j));
+        output += ".";
+        clear(0);
+      }
+      
+    }
+
     if(lines[i].indexOf(" = ") > -1){
 
       var split = lines[i].split(" ");
@@ -175,6 +187,8 @@ function compile(){
 
       } else alert("Error: Too many operations when defining " + currentName + ".");
 
+      continue;
+
     }
 
     if(lines[i].indexOf(" >") > -1){
@@ -184,6 +198,8 @@ function compile(){
       goToIndex(currentIndex);
 
       output += ".";
+      
+      continue;
 
     }
 
