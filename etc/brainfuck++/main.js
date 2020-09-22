@@ -75,6 +75,37 @@ function fullAddNumber(ind, num, rez){
   singleMove(1, rez);
 }
 
+function fullSubtraction(ind1, ind2, rez){
+  singleAddition(ind1, 1);
+  singleSubtraction(ind2, 1);
+  clear(rez);
+  singleMove(1, rez);
+}
+
+function singleSubtraction(ind1, ind2){
+  singleMove(ind1,0);
+  goToIndex(0);
+  output+="[-";
+  goToIndex(ind1);
+  output+="+";
+  goToIndex(ind2);
+  output+="-";
+  goToIndex(0);
+  output+="]";
+}
+
+function fullSubtNumber(ind, num, rez){
+  singleAddition(ind, 1);
+  subtNumber(1, num);
+  clear(rez);
+  singleMove(1, rez);
+}
+
+function subtNumber(ind, num){
+  goToIndex(ind);
+  for(var i = 0; i < num; i++) output+="-";
+}
+
 var varNames = [];
 var globalIndex = 0;
 var output = "";
@@ -113,7 +144,7 @@ function compile(){
           singleAddition(getIndex(split[2]), currentIndex);
         }
 
-      } else {
+      } else if (split.length == 5) {
 
         if(split[3] == "+") {
           if(isNaN(split[2]) && isNaN(split[4])) fullAddition(getIndex(split[2]), getIndex(split[4]), currentIndex);
@@ -124,8 +155,20 @@ function compile(){
             addNumber(currentIndex, parseInt(split[2], 10) + parseInt(split[4], 10));
           }
         }
+        
+        if(split[3] == "-") {
+          if(isNaN(split[2]) && isNaN(split[4])) fullSubtraction(getIndex(split[2]), getIndex(split[4]), currentIndex);
+          else if (isNaN(split[2])) fullSubtNumber(getIndex(split[2]), parseInt(split[4], 10), currentIndex);
+          else if (isNaN(split[4])) fullSubtNumber(parseInt(split[2], 10), getIndex(split[4]), currentIndex);
+          else {
+            clear(currentIndex);
+            var temp = parseInt(split[2], 10) - parseInt(split[4], 10);
+            if(temp < 0) console.warn("Warning: Value of " + currentName + " is negative");
+            addNumber(currentIndex, temp);
+          }
+        }
 
-      }
+      } else alert("Error: Too many operations when defining " + currentName + ".");
 
     }
 
