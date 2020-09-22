@@ -119,6 +119,7 @@ varNames[0] = "TEMP1";
 varNames[1] = "TEMP2"
 
 function compile(){
+  output = "";
   var lines = getCode().split("\n");
   for(var i = 0; i < lines.length; i++){
 
@@ -143,6 +144,8 @@ function compile(){
       }
       
       clear(0);
+      
+      continue;
       
     }
 
@@ -213,6 +216,25 @@ function compile(){
       
       continue;
 
+    }
+    
+    if(lines[i].indexOf(" <") > -1){
+      
+      var currentName = lines[i].substr(0, lines[i].indexOf(" >"));
+      var currentIndex = varNames.length;
+      
+      for (var j = 2; j < varNames.length; j++) {
+        if (currentName == varNames[j]) {
+          currentIndex = j;
+          break;
+        }
+      }
+      
+      varNames[currentIndex] = currentName;
+      
+      goToIndex(currentIndex);
+      output += ",";
+      
     }
 
   }
